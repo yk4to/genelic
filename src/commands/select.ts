@@ -20,8 +20,9 @@ export const select = async (isForced: boolean, isMarkdown: boolean) => {
       choices: licenseChoices,
       initial: 1
     });
-    console.log(licenseId);
-    generate(licenseId, isForced, isMarkdown);
+    if (licenseId) {
+      generate(licenseId, isForced, isMarkdown);
+    }
   } catch(error) {
     signale.error(error);
   }
