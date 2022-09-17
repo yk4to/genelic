@@ -30,6 +30,17 @@ genelic <id>
 
 The full list of license identifiers can be found on the [SPDX website](https://spdx.org/licenses/).
 
+### Commands
+
+```shell
+genelic select
+```
+
+You can choose from all licenses like this:
+
+![](https://user-images.githubusercontent.com/64204135/190841310-1048be61-791f-4ad0-b7d9-2750a4924137.png)
+
+
 ### Options
 
 #### `-f`,`--force`
