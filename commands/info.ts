@@ -1,3 +1,4 @@
+import { Table, colors } from "../deps.ts";
 import { License, Permission, Condition, Limitation } from "../types.ts";
 import logger from "../utils/logger.ts";
 import getLicenseFromId from "../utils/getLicenseFromId.ts";
@@ -15,56 +16,38 @@ const infoCommand = async (option: any) => {
 }
 
 export const logLicenseInfo = (license: License) => {
-  logger.title(`--- ${license.title} (${license["spdx-id"]}) ---`);
-  console.log(license.description);
+  const { title, description, permissions, conditions, limitations } = license;
+  logger.title(`--- ⚖ ${title} (${license["spdx-id"]}) ---`);
+  console.log(description);
 
-  logger.bold("Permissions:");
-  license.permissions?.forEach(logPermissionInfo);
-  logger.bold("Conditions:");
-  license.conditions?.forEach(logConditionInfo);
-  logger.bold("Limitations:");
-  license.limitations?.forEach(logLimitationInfo);
-}
+  const largestLength = Math.max(permissions?.length ?? 0, conditions?.length ?? 0, limitations?.length ?? 0);
 
-const logPermissionInfo = (permission: Permission) => {
-  const emoji = () => {
-    switch (permission) {
-      case "commercial-use":
-        return "💰";
-      case "modifications":
-        return "🛠";
-      case "distribution":
-        return "📦";
-      case "private-use":
-        return "🔒";
-      case "patent-use":
-        return "📜";
-    }
-  };
-  const { label } = rules.permissions.find((rule) => rule.tag === permission)!;
-  console.log(` ${emoji()} ${label}`);
+  new Table()
+    .header([colors.bold.green("Permissions"), colors.bold.red("Limitations"), colors.bold.blue("Conditions")])
+    .body(
+      Array.from({ length: largestLength }, (_, i) => [
+        permissions?.[i] ? colors.green("✔︎ ") + getPermissionLabel(permissions?.[i]) : (i === 0 ? "none" : ""),
+        limitations?.[i] ? colors.red("✖︎ ") + getLimitationLabel(limitations?.[i]) : (i === 0 ? "none" : ""),
+        conditions?.[i] ? colors.blue("ℹ︎ ") + getConditionLabel(conditions?.[i]) : (i === 0 ? "none" : ""),
+      ])
+    )
+    .padding(2)
+    .render();
 };
 
-const logConditionInfo = (condition: Condition) => {
-  const { label } = rules.conditions.find((rule) => rule.tag === condition)!;
-  console.log(` 📋 ${label}`);
+const getPermissionLabel = (permission: Permission) => {
+  const rule = rules.permissions.find((rule) => rule.tag === permission);
+  return rule?.label ?? "";
 };
 
-const logLimitationInfo = (limitation: Limitation) => {
-  const emoji = () => {
-    switch (limitation) {
-      case "trademark-use":
-        return "🏷";
-      case "liability":
-        return "📋";
-      case "patent-use":
-        return "📜";
-      case "warranty":
-        return "⚖";
-    }
-  };
-  const { label } = rules.limitations.find((rule) => rule.tag === limitation)!;
-  console.log(` ${emoji()} ${label}`);
+const getConditionLabel = (condition: Condition) => {
+  const rule = rules.conditions.find((rule) => rule.tag === condition);
+  return rule?.label ?? "";
+};
+
+const getLimitationLabel = (limitation: Limitation) => {
+  const rule = rules.limitations.find((rule) => rule.tag === limitation);
+  return rule?.label ?? "";
 };
 
 export default infoCommand;
