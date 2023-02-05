@@ -10,7 +10,7 @@ const info = new Command()
 
 await new Command()
   .name("genelic")
-  .version("0.0.1")
+  .version("1.0.0")
   .description("Generate a license file for your project.")
   .arguments("[id:string]")
   .option("-o, --output <output:string>", "Output file name.",{ default: "LICENSE" })
