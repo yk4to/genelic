@@ -44,6 +44,7 @@ $ genelic -h
   Commands:
 
     info  [id]  - Show license info.
+    list        - List all licenses.
 ```
 
 The full list of license identifiers can be found on the [`github/choosealicense.com`](https://github.com/github/choosealicense.com/tree/gh-pages/_licenses) repository.
