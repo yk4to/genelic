@@ -1,4 +1,4 @@
-dist/
-release/
-node_modules/
+bin/
 .DS_Store
+licenses.ts
+rules.ts

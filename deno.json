@@ -1,5 +1,8 @@
 {
   "tasks": {
-    "run": "deno run mod.ts"
+    "run": "deno run --allow-read --allow-write mod.ts",
+    "generate-data": "deno run --allow-read --allow-write scripts/generate-data.ts",
+    "compile": "deno compile --allow-read --allow-write --unstable --output=bin/genelic mod.ts",
+    "build": "deno task generate-data && deno task compile"
   }
 }
