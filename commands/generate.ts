@@ -1,6 +1,7 @@
-import { Confirm, path, fs } from "../deps.ts";
+import { Confirm, Input, path, fs, readPackage } from "../deps.ts";
 import logger from "../utils/logger.ts";
 import getLicenseFromId from "../utils/getLicenseFromId.ts";
+import getFields from "../utils/getFields.ts";
 import { logLicenseInfo } from "./info.ts";
 
 type Option = {
@@ -14,9 +15,10 @@ type Option = {
 const generateCommand = async (option: any, id: string | undefined) => {
   const { output, force, info, parents } = option as Option;
 
-  const outputExists = await Deno.stat(output).catch(() => false);
-  const outputDir = path.dirname(output);
-  const outputDirExists = await Deno.stat(outputDir).catch(() => false);
+  const outputExists = await Deno.stat(output).catch(() => false) !== false;
+  const outputAbsolutePath = path.resolve(Deno.cwd(), output);
+  const outputDir = path.dirname(outputAbsolutePath);
+  const outputDirExists = await Deno.stat(outputDir).catch(() => false) !== false;
 
   if (!force && outputExists) {
     const overwrite = await Confirm.prompt({
@@ -32,7 +34,13 @@ const generateCommand = async (option: any, id: string | undefined) => {
     Deno.exit(1);
   }
 
-  const license = await getLicenseFromId(id);
+  const pkgJson = await readPackage({ cwd: outputDir }).catch(() => undefined);
+
+  if (pkgJson?.license) {
+    console.log(`🔍 License "${pkgJson.license}" is set in package.json.`);
+  }
+
+  const license = await getLicenseFromId(id ?? pkgJson?.license);
 
   if (info) {
     logLicenseInfo(license);
@@ -42,13 +50,30 @@ const generateCommand = async (option: any, id: string | undefined) => {
     await fs.ensureDir(outputDir);
   }
 
-  if (output.endsWith(".md")) {
-    await Deno.writeTextFile(output, `# LICENSE\n\n\`\`\`\n${license.content}\n\`\`\``);
-  } else {
-    await Deno.writeTextFile(output, license.content);
+  let content = license.content;
+
+  const fields = await getFields(outputAbsolutePath);
+  for (const field of fields) {
+    if (content.includes(`[${field.tag}]`)) {
+      const value = await Input.prompt({
+        message: `[${field.tag}] ${field.description}:`,
+        default: field.default,
+      });
+      if (value) {
+        content = content.replaceAll(`[${field.tag}]`, value);
+      } else {
+        logger.warn(`[${field.tag}] is not set.`);
+      }
+    }
   }
 
-  logger.bold(`✨ License file "${output}" generated.`);
+  if (outputAbsolutePath.endsWith(".md")) {
+    content = `# LICENSE\n\n\`\`\`\n${content}\n\`\`\``
+  }
+
+  await Deno.writeTextFile(outputAbsolutePath, content);
+
+  logger.bold(`✨ License file "${outputAbsolutePath}" generated.`);
 }
 
 export default generateCommand;
