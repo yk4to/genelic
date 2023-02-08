@@ -13,13 +13,22 @@ You can choose from all the licenses in [choosealicense.com](https://choosealice
 ### Deno (Recommended)
 
 ```shell
-deno install --allow-read --allow-write --allow-env -n genelic https://raw.githubusercontent.com/fus1ondev/genelic/deno/mod.ts
+deno install --allow-read --allow-write --allow-env -n genelic https://raw.githubusercontent.com/fus1ondev/genelic/main/mod.ts
 ```
 
 ### Homebrew
 
 ```shell
 brew install fus1ondev/tap/genelic
+```
+
+### npm
+
+> **Warning**
+> Currently v1 cannot be exported to npm, so the version of what can be installed from npm is out of date.
+
+```shell
+npm install -g genelic
 ```
 
 ## Usage
