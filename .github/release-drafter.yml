@@ -1,0 +1,20 @@
+categories:
+  - title: '🚀 Enhancements'
+    labels:
+      - 'enhancement'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'bugfix'
+  - title: '🌎 Localization'
+    labels:
+      - 'localization'
+  - title: '🧰 Maintenance'
+    label:
+      - 'chore'
+      - 'documentation'
+      - 'dependencies'
+exclude-labels:
+  - 'skip-changelog'
+template: |
+  ## Changes
+  $CHANGES
