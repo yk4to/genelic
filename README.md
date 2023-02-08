@@ -8,16 +8,10 @@ You can choose from all the licenses in [choosealicense.com](https://choosealice
 
 ## Install
 
-### Homebrew
+### Deno
 
-```shell
-brew install Fus1onDev/tap/genelic
 ```
-
-### npm
-
-```shell
-npm install genelic -g
+deno install --allow-read --allow-write --allow-env -n genelic https://raw.githubusercontent.com/fus1ondev/genelic/deno/mod.ts
 ```
 
 ## Usage
@@ -49,14 +43,20 @@ $ genelic -h
 
 The full list of license identifiers can be found on the [`github/choosealicense.com`](https://github.com/github/choosealicense.com/tree/gh-pages/_licenses) repository.
 
-## Build Locally
+## Development
 
 ```sh
 git clone --recursive https://github.com/fus1ondev/genelic
 
 cd genelic
 
-deno task build
+deno task run [...]
+```
+
+### Update license data
+
+```sh
+deno task generate-data
 ```
 
 ## License
