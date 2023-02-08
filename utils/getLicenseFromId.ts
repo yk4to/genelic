@@ -1,8 +1,19 @@
-import { Select } from "../deps.ts";
+import { Confirm, Select, readPackage } from "../deps.ts";
 import { licenses } from "../licenses.ts";
 import logger from "../utils/logger.ts";
 
-const getLicenseFromId = async (id: string | undefined) => {
+const getLicenseFromId = async (id: string | undefined, cwd: string) => {
+  const pkgJson = await readPackage({ cwd }).catch(() => undefined);
+
+  if (pkgJson?.license) {
+    const usePkgLicense = await Confirm.prompt({
+      message: `License "${pkgJson.license}" is set in package.json. Use it?`,
+    });
+    if (usePkgLicense) {
+      id = pkgJson.license;
+    }
+  }
+
   id = id ?? await Select.prompt({
     message: "Select a license:",
     options: licenses.map((license) => ({

@@ -11,7 +11,7 @@ type Option = {
 // deno-lint-ignore no-explicit-any
 const infoCommand = async (option: any) => {
   const { id } = option as Option;
-  const license = await getLicenseFromId(id);
+  const license = await getLicenseFromId(id, Deno.cwd());
   logLicenseInfo(license);
 }
 

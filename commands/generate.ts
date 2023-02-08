@@ -33,14 +33,8 @@ const generateCommand = async (option: any, id: string | undefined) => {
     logger.error(`Directory "${outputDir}" does not exist.`);
     Deno.exit(1);
   }
-
-  const pkgJson = await readPackage({ cwd: outputDir }).catch(() => undefined);
-
-  if (pkgJson?.license) {
-    console.log(`🔍 License "${pkgJson.license}" is set in package.json.`);
-  }
-
-  const license = await getLicenseFromId(id ?? pkgJson?.license);
+  
+  const license = await getLicenseFromId(id, outputDir);
 
   if (info) {
     logLicenseInfo(license);
