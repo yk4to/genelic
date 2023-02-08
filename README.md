@@ -8,10 +8,16 @@ You can choose from all the licenses in [choosealicense.com](https://choosealice
 
 ## Install
 
-### Deno
+### Deno (Recommended)
 
-```
+```shell
 deno install --allow-read --allow-write --allow-env -n genelic https://raw.githubusercontent.com/fus1ondev/genelic/deno/mod.ts
+```
+
+### Homebrew
+
+```shell
+brew install fus1ondev/tap/genelic
 ```
 
 ## Usage
