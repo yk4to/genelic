@@ -1,6 +1,8 @@
 # genelic 
 
-![](https://user-images.githubusercontent.com/64204135/190658005-2dcefd5a-1af3-4d4e-9ed8-8872b44d67a2.png)
+> ⚖️ Generate a license file for your project easily
+
+![](./assets/screenshot.png)
 
 `genelic` is a command line tool to generate a license file for your project easily.
 
