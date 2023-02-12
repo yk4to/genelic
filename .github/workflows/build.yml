@@ -25,10 +25,12 @@ jobs:
         deno-version: v1.x
     - name: Get Version Number
       run: echo "VERSION=$(deno run version.ts)" >> "$GITHUB_ENV"
-    - name: Compile for ${{ matrix.target }}
+    - name: Compile
       run: deno task compile --target ${{ matrix.target }}
+    - name: Move Binary
+      run: mv bin/genelic genelic
     - name: Compress Binary
-      run: tar -zcvf genelic-v${{ env.VERSION }}-${{ matrix.target }}.tar.gz bin/genelic
+      run: tar -zcvf genelic-v${{ env.VERSION }}-${{ matrix.target }}.tar.gz genelic
     - name: Upload
       if: github.ref != 'refs/heads/main'
       uses: actions/upload-artifact@v3
