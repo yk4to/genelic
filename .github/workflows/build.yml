@@ -24,7 +24,7 @@ jobs:
       with:
         deno-version: v1.x
     - name: Get Version Number
-      run: echo "VERSION=$(deno run version.ts)" >> "$GITHUB_ENV"
+      run: echo "VERSION=$(deno task run -V)" >> "$GITHUB_ENV"
     - name: Compile
       run: deno task compile --target ${{ matrix.target }}
     - name: Move Binary

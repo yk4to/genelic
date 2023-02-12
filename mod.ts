@@ -1,5 +1,4 @@
 import { Command } from "./deps.ts";
-import { version } from "./version.ts";
 
 import generateCommand from "./commands/generate.ts";
 import infoCommand from "./commands/info.ts";
@@ -17,7 +16,7 @@ const cli = async () => {
 
   await new Command()
     .name("genelic")
-    .version(version)
+    .version("1.1.0")
     .description("Generate a license file for your project.")
     .arguments("[id:string]")
     .option("-o, --output <output:string>", "Output file name.",{ default: "LICENSE" })
