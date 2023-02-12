@@ -1,18 +1,46 @@
 import { path, readPackage } from "../deps.ts";
+import readCargo from "./readCargo.ts";
+import readPyProject from "./readPyProject.ts";
 
 const getMeta = async (outputPath: string) => {
   const outputDir = path.dirname(outputPath);
   const pkgJson = await readPackage({ cwd: outputDir }).catch(() => undefined);
-  if (!pkgJson) {
-    return {};
+  if (pkgJson) {
+    return {
+      author: pkgJson.author?.name,
+      email: pkgJson.author?.email,
+      project: pkgJson.name,
+      description: pkgJson.description,
+      url: pkgJson.homepage ?? pkgJson.repository?.url.replace(/^git\+/, "").replace(/\.git$/, ""),
+    };
   }
-  return {
-    author: pkgJson.author?.name,
-    email: pkgJson.author?.email,
-    project: pkgJson.name,
-    description: pkgJson.description,
-    url: pkgJson.repository?.url.replace(/^git\+/, "").replace(/\.git$/, "") ?? pkgJson.homepage,
-  };
+
+  const pyProjectToml = await readPyProject(outputDir);
+  if (pyProjectToml) {
+    const poetry = pyProjectToml.tool?.poetry;
+    const author = poetry?.authors?.[0];
+    return {
+      author: author?.name,
+      email: author?.email,
+      project: poetry?.name,
+      description: poetry?.description,
+      url: poetry?.homepage ?? poetry?.repository,
+    }
+  }
+
+  const cargoToml = await readCargo(outputDir);
+  if (cargoToml) {
+    const author = cargoToml.package?.authors?.[0];
+    return {
+      author: author?.name,
+      email: author?.email,
+      project: cargoToml.package?.name,
+      description: cargoToml.package?.description,
+      url: cargoToml.package?.homepage ?? cargoToml.package?.repository,
+    }
+  }
+
+  return {};
 }
 
 const getFields = async (outputPath: string) => {
