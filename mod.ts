@@ -16,7 +16,7 @@ const cli = async () => {
 
   await new Command()
     .name("genelic")
-    .version("1.1.0")
+    .version("1.1.1")
     .description("Generate a license file for your project.")
     .arguments("[id:string]")
     .option("-o, --output <output:string>", "Output file name.",{ default: "LICENSE" })
