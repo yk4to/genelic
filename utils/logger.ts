@@ -18,9 +18,6 @@ const logger = {
   bold: (message: string) => {
     console.log(bold(message));
   },
-  title: (message: string) => {
-    console.log(bold.brightBlue(message));
-  }
 }
 
 export default logger;

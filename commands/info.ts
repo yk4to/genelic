@@ -1,24 +1,24 @@
 import { Table, colors } from "../deps.ts";
 import { License, Permission, Condition, Limitation } from "../types.ts";
-import logger from "../utils/logger.ts";
 import getLicenseFromId from "../utils/getLicenseFromId.ts";
 import { rules } from "../rules.ts";
 
-type Option = {
-  id: string | undefined;
-}
-
 // deno-lint-ignore no-explicit-any
-const infoCommand = async (option: any) => {
-  const { id } = option as Option;
+const infoCommand = async (_option: any, id: string | undefined) => {
   const license = await getLicenseFromId(id, Deno.cwd());
   logLicenseInfo(license);
 }
 
 export const logLicenseInfo = (license: License) => {
   const { title, description, permissions, conditions, limitations } = license;
-  logger.title(`--- ⚖ ${title} (${license["spdx-id"]}) ---`);
-  console.log(description);
+  
+  new Table()
+    .header([colors.bold.brightBlue(`⚖ ${title} (${license["spdx-id"]})`)])
+    .body([[description]])
+    .maxColWidth(80)
+    .padding(2)
+    .border(true)
+    .render();
 
   const largestLength = Math.max(permissions?.length ?? 0, conditions?.length ?? 0, limitations?.length ?? 0);
 
