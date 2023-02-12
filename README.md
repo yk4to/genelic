@@ -31,6 +31,16 @@ brew install fus1ondev/tap/genelic
 npm install -g genelic
 ```
 
+## Features
+
+### Supported files
+
+If a license field is found in the following files, the license will be automatically selected.
+
+- `package.json`
+- `Cargo.toml`
+- `pyproject.toml`
+
 ## Usage
 
 ```shell
