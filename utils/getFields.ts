@@ -1,12 +1,33 @@
-import { path, readPackage } from "../deps.ts";
+import { path, readPackage, getGitUserInfo } from "../deps.ts";
 import readCargo from "./readCargo.ts";
 import readPyProject from "./readPyProject.ts";
 
+type Meta = {
+  author?: string | undefined,
+  email?: string | undefined,
+  project?: string | undefined,
+  description?: string | undefined,
+  url?: string | undefined,
+}
+
 const getMeta = async (outputPath: string) => {
+  let meta: Meta = {};
+
   const outputDir = path.dirname(outputPath);
+
+  const gitInfo = await getGitUserInfo({ cwd: outputDir });
+  if (gitInfo) {
+    meta = {
+      ...meta,
+      author: gitInfo.name,
+      email: gitInfo.email,
+    };
+  }
+
   const pkgJson = await readPackage({ cwd: outputDir }).catch(() => undefined);
   if (pkgJson) {
-    return {
+    meta = {
+      ...meta,
       author: pkgJson.author?.name,
       email: pkgJson.author?.email,
       project: pkgJson.name,
@@ -19,7 +40,8 @@ const getMeta = async (outputPath: string) => {
   if (pyProjectToml) {
     const poetry = pyProjectToml.tool?.poetry;
     const author = poetry?.authors?.[0];
-    return {
+    meta = {
+      ...meta,
       author: author?.name,
       email: author?.email,
       project: poetry?.name,
@@ -31,7 +53,8 @@ const getMeta = async (outputPath: string) => {
   const cargoToml = await readCargo(outputDir);
   if (cargoToml) {
     const author = cargoToml.package?.authors?.[0];
-    return {
+    meta = {
+      ...meta,
       author: author?.name,
       email: author?.email,
       project: cargoToml.package?.name,
@@ -40,7 +63,7 @@ const getMeta = async (outputPath: string) => {
     }
   }
 
-  return {};
+  return meta;
 }
 
 const getFields = async (outputPath: string) => {
