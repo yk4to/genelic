@@ -12,13 +12,19 @@ You can choose from all the licenses in [choosealicense.com](https://choosealice
 
 ### Deno (Recommended)
 
-```shell
-deno install --allow-read --allow-write --allow-env --allow-sys -n genelic https://raw.githubusercontent.com/fus1ondev/genelic/main/mod.ts
+```
+deno install --allow-read --allow-write --allow-env --allow-sys --allow-net --allow-run -n genelic https://raw.githubusercontent.com/fus1ondev/genelic/main/mod.ts
+```
+
+You can upgrade genelic with the following command.
+
+```
+genelic upgrade
 ```
 
 ### Homebrew
 
-```shell
+```
 brew install fus1ondev/tap/genelic
 ```
 
@@ -27,7 +33,7 @@ brew install fus1ondev/tap/genelic
 > **Warning**
 > Currently v1 cannot be exported to npm, so the version of what can be installed from npm is out of date.
 
-```shell
+```
 npm install -g genelic
 ```
 
@@ -54,11 +60,11 @@ It asks for these values when the file is generated, but the following sources a
 
 ## Usage
 
-```shell
+```
 $ genelic -h
 
   Usage:   genelic [id]
-  Version: 1.2.0
+  Version: 1.2.1
 
   Description:
 
@@ -78,6 +84,7 @@ $ genelic -h
     info     [id]  - Show license info.
     preview  [id]  - Preview license.
     list           - List all licenses.
+    upgrade        - Upgrade genelic. (Don't use this if you installed genelic from Homebrew.)
 ```
 
 The full list of license identifiers can be found on the [`github/choosealicense.com`](https://github.com/github/choosealicense.com/tree/gh-pages/_licenses) repository.
@@ -92,19 +99,19 @@ The width of the `info` and `preview` commands is automatically adjusted to the 
 
 #### Example
 
-```sh
+```
 genelic list -i | fzf --preview "genelic info {} ; genelic preview {}" --bind "enter:become(genelic {})"
 ```
 
 If you want to use license names instead of IDs as titles of the list:
 
-```sh
+```
 genelic list -t | fzf --preview "genelic info -t {} ; genelic preview -t {}" --bind "enter:become(genelic -t {})"
 ```
 
 ## Development
 
-```sh
+```
 git clone --recursive https://github.com/fus1ondev/genelic
 
 cd genelic
@@ -114,7 +121,7 @@ deno task run [...]
 
 ### Update license data
 
-```sh
+```
 deno task generate-data
 ```
 

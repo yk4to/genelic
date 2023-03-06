@@ -1,4 +1,4 @@
-import { Command } from "./deps.ts";
+import { Command, UpgradeCommand, GithubProvider } from "./deps.ts";
 
 import generateCommand from "./commands/generate.ts";
 import infoCommand from "./commands/info.ts";
@@ -28,6 +28,16 @@ const cli = async () => {
     .option("-t, --title", "Show titles only.", { conflicts: ["id"] })
     .action(listCommand);
 
+  const upgrade = new UpgradeCommand({
+    main: "mod.ts",
+    args: ["--allow-read", "--allow-write", "--allow-env", "--allow-sys", "--allow-net"],
+    provider: [
+      new GithubProvider({ repository: "fus1ondev/genelic" }),
+    ],
+  })
+  .name("upgrade")
+  .description("Upgrade genelic. (Don't use this if you installed genelic from Homebrew.)")
+
   await new Command()
     .name("genelic")
     .version(await Deno.readTextFile("./version.txt"))
@@ -41,6 +51,7 @@ const cli = async () => {
     .command("info", info)
     .command("preview", preview)
     .command("list", list)
+    .command("upgrade", upgrade)
     .parse();
 }
 
