@@ -47,7 +47,7 @@ If a license field is found in the following files, the license will be automati
 $ genelic -h
 
   Usage:   genelic [id]
-  Version: 1.0.0       
+  Version: 1.2.0
 
   Description:
 
@@ -55,20 +55,34 @@ $ genelic -h
 
   Options:
 
-    -h, --help               - Show this help.                                                
-    -V, --version            - Show the version number for this program.                      
+    -h, --help               - Show this help.
+    -V, --version            - Show the version number for this program.
     -o, --output   <output>  - Output file name.                          (Default: "LICENSE")
-    -f, --force              - Overwrite existing license file.                               
-    -i, --info               - Log license info.                                              
-    -p, --parents            - Create parent directories as needed.                           
+    -f, --force              - Overwrite existing license file.
+    -p, --parents            - Create parent directories as needed.
 
   Commands:
 
-    info  [id]  - Show license info.
-    list        - List all licenses.
+    info     [id]  - Show license info.
+    preview  [id]  - Preview license.
+    list           - List all licenses.
 ```
 
 The full list of license identifiers can be found on the [`github/choosealicense.com`](https://github.com/github/choosealicense.com/tree/gh-pages/_licenses) repository.
+
+## Advanced Usage
+
+### Use with fzf
+
+By using the [fzf](https://github.com/junegunn/fzf) command, you can select a license with a graphical fuzzy finder.
+
+The width of the `info` and `preview` commands is automatically adjusted to the width of the fzf preview window.
+
+#### Example
+
+```sh
+genelic list --id | fzf --preview "genelic info {} ; genelic preview {}" --bind "enter:become(genelic {})"
+```
 
 ## Development
 
