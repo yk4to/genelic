@@ -13,7 +13,7 @@ You can choose from all the licenses in [choosealicense.com](https://choosealice
 ### Deno (Recommended)
 
 ```shell
-deno install --allow-read --allow-write --allow-env -n genelic https://raw.githubusercontent.com/fus1ondev/genelic/main/mod.ts
+deno install --allow-read --allow-write --allow-env --allow-sys -n genelic https://raw.githubusercontent.com/fus1ondev/genelic/main/mod.ts
 ```
 
 ### Homebrew
