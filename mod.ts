@@ -30,7 +30,7 @@ const cli = async () => {
 
   await new Command()
     .name("genelic")
-    .version("1.2.0")
+    .version(await Deno.readTextFile("./version.txt"))
     .description("Generate a license file for your project.")
     .arguments("[id:string]")
     .option("-t, --title <title:string>", "Use title instead of id.")

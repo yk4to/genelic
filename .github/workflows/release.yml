@@ -15,12 +15,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Setup Deno
-      uses: denoland/setup-deno@v1
-      with:
-        deno-version: v1.x
     - name: Get Version Number
-      run: echo "VERSION=$(deno task run -V)" >> "$GITHUB_ENV"
+      run: echo "VERSION=$(cat version.txt)" >> "$GITHUB_ENV"
     - name: Create Release Draft
       uses: release-drafter/release-drafter@v5
       env:
