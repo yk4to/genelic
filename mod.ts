@@ -10,26 +10,30 @@ const cli = async () => {
   const info = new Command()
     .description("Show license info.")
     .arguments("[id:string]")
+    .option("-t, --title <title:string>", "Use title instead of id.")
     .option("-w, --width <width:number>", "Set width.", { default: 80 })
     .action(infoCommand);
 
   const preview = new Command()
     .description("Preview license.")
     .arguments("[id:string]")
+    .option("-t, --title <title:string>", "Use title instead of id.")
     .option("-w, --width <width:number>", "Set width.", { default: 80 })
     .option("-H, --highlight", "Highlight fields.")
     .action(previewCommand);
 
   const list = new Command()
     .description("List all licenses.")
-    .option("--id", "Show ids only.")
+    .option("-i, --id", "Show ids only.", { conflicts: ["title"] })
+    .option("-t, --title", "Show titles only.", { conflicts: ["id"] })
     .action(listCommand);
 
   await new Command()
     .name("genelic")
-    .version("1.1.1")
+    .version("1.2.0")
     .description("Generate a license file for your project.")
     .arguments("[id:string]")
+    .option("-t, --title <title:string>", "Use title instead of id.")
     .option("-o, --output <output:string>", "Output file name.", { default: "LICENSE" })
     .option("-f, --force", "Overwrite existing license file.")
     .option("-p, --parents", "Create parent directories as needed.")

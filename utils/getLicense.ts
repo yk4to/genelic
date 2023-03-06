@@ -4,7 +4,9 @@ import logger from "../utils/logger.ts";
 import readCargo from "./readCargo.ts";
 import readPyProject from "./readPyProject.ts";
 
-const getLicenseFromId = async (id: string | undefined, cwd: string) => {
+const getLicense = async (id: string | undefined, title: string | undefined, cwd: string) => {
+  id = licenses.find((license) => license.title === title)?.["spdx-id"];
+
   if (!id) {
     const pkgJson = await readPackage({ cwd }).catch(() => undefined);
     if (pkgJson?.license) {
@@ -63,4 +65,4 @@ const getLicenseFromId = async (id: string | undefined, cwd: string) => {
   return license;
 }
 
-export default getLicenseFromId;
+export default getLicense;

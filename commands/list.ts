@@ -3,13 +3,16 @@ import { licenses } from "../licenses.ts";
 
 type Option = {
   id: boolean;
+  title: boolean;
 }
 
 // deno-lint-ignore no-explicit-any
 const listCommand = (option: any) => {
-  const { id } = option as Option;
+  const { id, title } = option as Option;
   if (id) {
     licenses.forEach((license) => console.log(license["spdx-id"]));
+  } else if (title) {
+    licenses.forEach((license) => console.log(license.title));
   } else {
     new Table()
     .header([colors.bold("Title"), colors.bold("SPDX ID")])

@@ -33,10 +33,21 @@ npm install -g genelic
 
 ## Features
 
-### Supported files
+### Automatic selection of the licence in use
 
 If a license field is found in the following files, the license will be automatically selected.
 
+- `package.json`
+- `Cargo.toml`
+- `pyproject.toml`
+
+### Autocompletion of fields
+
+Most licences have fields that require detailed information to be entered.
+
+It asks for these values when the file is generated, but the following sources are used to automatically fill in the fields.
+
+- local or global git config
 - `package.json`
 - `Cargo.toml`
 - `pyproject.toml`
@@ -57,6 +68,7 @@ $ genelic -h
 
     -h, --help               - Show this help.
     -V, --version            - Show the version number for this program.
+    -t, --title    <title>   - Use title instead of id.
     -o, --output   <output>  - Output file name.                          (Default: "LICENSE")
     -f, --force              - Overwrite existing license file.
     -p, --parents            - Create parent directories as needed.
@@ -81,7 +93,13 @@ The width of the `info` and `preview` commands is automatically adjusted to the 
 #### Example
 
 ```sh
-genelic list --id | fzf --preview "genelic info {} ; genelic preview {}" --bind "enter:become(genelic {})"
+genelic list -i | fzf --preview "genelic info {} ; genelic preview {}" --bind "enter:become(genelic {})"
+```
+
+If you want to use license names instead of IDs as titles of the list:
+
+```sh
+genelic list -t | fzf --preview "genelic info -t {} ; genelic preview -t {}" --bind "enter:become(genelic -t {})"
 ```
 
 ## Development

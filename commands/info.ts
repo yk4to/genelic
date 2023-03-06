@@ -1,20 +1,21 @@
 import { Table, colors } from "../deps.ts";
-import { License, Permission, Condition, Limitation } from "../types.ts";
-import getLicenseFromId from "../utils/getLicenseFromId.ts";
+import { Permission, Condition, Limitation } from "../types.ts";
+import getLicense from "../utils/getLicense.ts";
 import { rules } from "../rules.ts";
 
 type Option = {
   width: number;
+  title: string | undefined;
 }
 
 // deno-lint-ignore no-explicit-any
 const infoCommand = async (option: any, id: string | undefined) => {
-  let { width } = option as Option;
+  let { width, title: _title } = option as Option;
   const fzfWidth = Deno.env.get("FZF_PREVIEW_COLUMNS");
   width = fzfWidth ? parseInt(fzfWidth) : width;
   width = width > 0 ? width : 80;
 
-  const license = await getLicenseFromId(id, Deno.cwd());
+  const license = await getLicense(id, _title, Deno.cwd());
   const { title, description, permissions, conditions, limitations } = license;
   
   new Table()
