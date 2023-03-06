@@ -1,19 +1,17 @@
-import { Confirm, Input, path, fs, readPackage } from "../deps.ts";
+import { Confirm, Input, path, fs } from "../deps.ts";
 import logger from "../utils/logger.ts";
 import getLicenseFromId from "../utils/getLicenseFromId.ts";
 import getFields from "../utils/getFields.ts";
-import { logLicenseInfo } from "./info.ts";
 
 type Option = {
   output: string;
   force: boolean | undefined;
-  info: boolean | undefined;
   parents: boolean | undefined;
 }
 
 // deno-lint-ignore no-explicit-any
 const generateCommand = async (option: any, id: string | undefined) => {
-  const { output, force, info, parents } = option as Option;
+  const { output, force, parents } = option as Option;
 
   const outputExists = await Deno.stat(output).catch(() => false) !== false;
   const outputAbsolutePath = path.resolve(Deno.cwd(), output);
@@ -35,10 +33,6 @@ const generateCommand = async (option: any, id: string | undefined) => {
   }
   
   const license = await getLicenseFromId(id, outputDir);
-
-  if (info) {
-    logLicenseInfo(license);
-  }
 
   if (parents && !outputDirExists) {
     await fs.ensureDir(outputDir);
