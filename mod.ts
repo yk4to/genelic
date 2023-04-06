@@ -31,7 +31,7 @@ const cli = async () => {
 
   const upgrade = new UpgradeCommand({
     main: "mod.ts",
-    args: ["--allow-read", "--allow-write", "--allow-env", "--allow-sys", "--allow-net"],
+    args: ["-A"],
     provider: [
       new GithubProvider({ repository: "fus1ondev/genelic" }),
     ],

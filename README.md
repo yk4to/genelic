@@ -19,7 +19,7 @@ deno install -qAn glc https://raw.githubusercontent.com/fus1ondev/genelic/main/m
 You can upgrade genelic with the following command.
 
 ```
-genelic upgrade
+glc upgrade
 ```
 
 ### Homebrew
