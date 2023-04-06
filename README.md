@@ -13,7 +13,7 @@ You can choose from all the licenses in [choosealicense.com](https://choosealice
 ### Deno (Recommended)
 
 ```
-deno install --allow-read --allow-write --allow-env --allow-sys --allow-net --allow-run -n genelic https://raw.githubusercontent.com/fus1ondev/genelic/main/mod.ts
+deno install -qAn glc https://raw.githubusercontent.com/fus1ondev/genelic/main/mod.ts
 ```
 
 You can upgrade genelic with the following command.
@@ -28,7 +28,7 @@ genelic upgrade
 brew install fus1ondev/tap/genelic
 ```
 
-### npm
+### ~~npm~~ (Deprecated)
 
 > **Warning**
 > Currently v1 cannot be exported to npm, so the version of what can be installed from npm is out of date.
@@ -58,13 +58,21 @@ It asks for these values when the file is generated, but the following sources a
 - `Cargo.toml`
 - `pyproject.toml`
 
-## Usage
+## Basic Usage
+
+To create a file "LICENSE" for the MIT license in the current directory, do like this:
 
 ```
-$ genelic -h
+$ glc mit
+```
 
-  Usage:   genelic [id]
-  Version: 1.2.1
+### Options
+
+```
+$ glc -h
+
+  Usage:   glc [id]
+  Version: 1.3.0
 
   Description:
 
@@ -100,16 +108,18 @@ The width of the `info` and `preview` commands is automatically adjusted to the 
 #### Example
 
 ```
-genelic list -i | fzf --preview "genelic info {} ; genelic preview {}" --bind "enter:become(genelic {})"
+glc list -i | fzf --preview "glc info {} ; glc preview {}" --bind "enter:become(glc {})"
 ```
 
 If you want to use license names instead of IDs as titles of the list:
 
 ```
-genelic list -t | fzf --preview "genelic info -t {} ; genelic preview -t {}" --bind "enter:become(genelic -t {})"
+glc list -t | fzf --preview "glc info -t {} ; glc preview -t {}" --bind "enter:become(glc -t {})"
 ```
 
 ## Development
+
+To update the license data (`licenses.ts`), you need to update the submodule recursively.
 
 ```
 git clone --recursive https://github.com/fus1ondev/genelic
