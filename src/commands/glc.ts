@@ -29,7 +29,7 @@ export const glcCommand = () => {
 		.action(listCommand);
 
 	const upgrade = new UpgradeCommand({
-		main: "mod.ts",
+		main: "cli.ts",
 		args: ["-A"],
 		provider: [
 			new GithubProvider({ repository: "fus1ondev/genelic" }),

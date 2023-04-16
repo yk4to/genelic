@@ -13,7 +13,7 @@ You can choose from all the licenses in [choosealicense.com](https://choosealice
 ### Deno (Recommended)
 
 ```
-deno install -qAn glc https://raw.githubusercontent.com/fus1ondev/genelic/main/mod.ts
+deno install -qAn glc https://raw.githubusercontent.com/fus1ondev/genelic/main/cli.ts
 ```
 
 You can upgrade genelic with the following command.
