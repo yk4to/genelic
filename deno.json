@@ -1,8 +1,8 @@
 {
   "tasks": {
-    "run": "deno run -A mod.ts",
-    "generate-data": "deno run --allow-read --allow-write scripts/generate-data.ts",
-    "compile": "deno compile -A --output=bin/glc mod.ts",
+    "run": "deno run -A cli.ts",
+    "generate-data": "deno run --allow-read --allow-write src/scripts/generate-data.ts",
+    "compile": "deno compile -A --output=bin/glc cli.ts",
     "build": "deno task generate-data && deno task compile"
   }
 }

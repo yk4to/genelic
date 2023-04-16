@@ -16,7 +16,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Get Version Number
-      run: echo "VERSION=$(sed -n 's/.*"\([^"]*\)".*/\1/p' version.ts)" >> "$GITHUB_ENV"
+      run: echo "VERSION=$(sed -n 's/.*"\([^"]*\)".*/\1/p' src/version.ts)" >> "$GITHUB_ENV"
     - name: Create Release Draft
       uses: release-drafter/release-drafter@v5
       env:

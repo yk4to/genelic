@@ -4,28 +4,32 @@ import { License } from "../types.ts";
 
 const licenses: License[] = [];
 for await (const dirEntry of Deno.readDir("./choosealicense.com/_licenses")) {
-  const { data, content } = matter.read(`./choosealicense.com/_licenses/${dirEntry.name}`);
-  const license = {
-    ...data,
-    content,
-  } as License;
-  licenses.push(license);
+	const { data, content } = matter.read(
+		`./choosealicense.com/_licenses/${dirEntry.name}`,
+	);
+	const license = {
+		...data,
+		content,
+	} as License;
+	licenses.push(license);
 }
 
 licenses.sort((a, b) => a["spdx-id"].localeCompare(b["spdx-id"]));
 
-const licensesTs = `import { License } from "./types.ts";
+const licensesTs = `import { License } from "../types.ts";
 export const licenses: License[] = ${JSON.stringify(licenses, null, 2)};
-`
-await Deno.writeTextFile("./licenses.ts", licensesTs);
+
+`;
+await Deno.writeTextFile("./src/generated/licenses.ts", licensesTs);
 
 console.log("licenses.ts generated");
 
 const yml = await Deno.readTextFile("./choosealicense.com/_data/rules.yml");
 const rules = parse(yml) as Record<string, string[]>;
-const rulesTs = `import { Rules } from "./types.ts";
+const rulesTs = `import { Rules } from "../types.ts";
 export const rules: Rules = ${JSON.stringify(rules, null, 2)};
-`
-await Deno.writeTextFile("./rules.ts", rulesTs);
+
+`;
+await Deno.writeTextFile("./src/generated/rules.ts", rulesTs);
 
 console.log("rules.ts generated");
