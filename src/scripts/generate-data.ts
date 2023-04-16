@@ -4,14 +4,14 @@ import { License } from "../types.ts";
 
 const licenses: License[] = [];
 for await (const dirEntry of Deno.readDir("./choosealicense.com/_licenses")) {
-	const { data, content } = matter.read(
-		`./choosealicense.com/_licenses/${dirEntry.name}`,
-	);
-	const license = {
-		...data,
-		content,
-	} as License;
-	licenses.push(license);
+  const { data, content } = matter.read(
+    `./choosealicense.com/_licenses/${dirEntry.name}`,
+  );
+  const license = {
+    ...data,
+    content,
+  } as License;
+  licenses.push(license);
 }
 
 licenses.sort((a, b) => a["spdx-id"].localeCompare(b["spdx-id"]));

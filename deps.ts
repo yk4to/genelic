@@ -1,12 +1,12 @@
 export {
-	colors,
-	Command,
-	Confirm,
-	GithubProvider,
-	Input,
-	Select,
-	Table,
-	UpgradeCommand,
+  colors,
+  Command,
+  Confirm,
+  GithubProvider,
+  Input,
+  Select,
+  Table,
+  UpgradeCommand,
 } from "https://deno.land/x/cliffy@v0.25.7/mod.ts";
 
 export * as path from "https://deno.land/std@0.176.0/path/mod.ts";
