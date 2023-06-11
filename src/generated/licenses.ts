@@ -1137,7 +1137,7 @@ export const licenses: License[] = [
     "using": {
       "World Countries": "https://github.com/mledoze/countries/blob/master/LICENSE",
       "OpenFlights": "https://github.com/jpatokal/openflights/blob/master/data/LICENSE",
-      "Public Zone Database": "https://github.com/zonedb/zonedb/blob/main/LICENSE.md",
+      "Public Zone Database": "https://github.com/zonedb/zonedb/blob/main/LICENSE-DATA.md",
     },
     "permissions": [
       "commercial-use",
@@ -1291,8 +1291,8 @@ export const licenses: License[] = [
     "note":
       "It is recommended to add a link to the license and copyright notice at the top of each source file, example text can be found at https://oss.oracle.com/licenses/upl/.",
     "using": {
-      "Oracle Product Images for Docker": "https://github.com/oracle/docker-images/blob/main/LICENSE.txt",
-      "Skater": "https://github.com/oracle/Skater/blob/master/LICENSE",
+      "Roc": "https://github.com/roc-lang/roc/blob/main/LICENSE",
+      "Skater": "https://github.com/oracle/skater/blob/main/LICENSE.txt",
       "Soufflé": "https://github.com/souffle-lang/souffle/blob/master/LICENSE",
     },
     "permissions": [
@@ -1310,7 +1310,7 @@ export const licenses: License[] = [
       "warranty",
     ],
     "content":
-      '\nCopyright (c) [year] [fullname]\n\nThe Universal Permissive License (UPL), Version 1.0\n\nSubject to the condition set forth below, permission is hereby granted to any\nperson obtaining a copy of this software, associated documentation and/or data\n(collectively the "Software"), free of charge and under any and all copyright\nrights in the Software, and any and all patent rights owned or freely\nlicensable by each licensor hereunder covering either (i) the unmodified\nSoftware as contributed to or provided by such licensor, or (ii) the Larger\nWorks (as defined below), to deal in both\n\n(a) the Software, and\n(b) any piece of software and/or hardware listed in the lrgrwrks.txt file if\none is included with the Software (each a “Larger Work” to which the Software\nis contributed by such licensors),\n\nwithout restriction, including without limitation the rights to copy, create\nderivative works of, display, perform, and distribute the Software and make,\nuse, sell, offer for sale, import, export, have made, and have sold the\nSoftware and the Larger Work(s), and to sublicense the foregoing rights on\neither these or other terms.\n\nThis license is subject to the following condition:\nThe above copyright notice and either this complete permission notice or at\na minimum a reference to the UPL must be included in all copies or\nsubstantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n',
+      '\nCopyright (c) [year] [fullname]\n\nThe Universal Permissive License (UPL), Version 1.0\n\nSubject to the condition set forth below, permission is hereby granted to any\nperson obtaining a copy of this software, associated documentation and/or data\n(collectively the "Software"), free of charge and under any and all copyright\nrights in the Software, and any and all patent rights owned or freely\nlicensable by each licensor hereunder covering either (i) the unmodified\nSoftware as contributed to or provided by such licensor, or (ii) the Larger\nWorks (as defined below), to deal in both\n\n(a) the Software, and\n(b) any piece of software and/or hardware listed in the lrgrwrks.txt file if\none is included with the Software (each a "Larger Work" to which the Software\nis contributed by such licensors),\n\nwithout restriction, including without limitation the rights to copy, create\nderivative works of, display, perform, and distribute the Software and make,\nuse, sell, offer for sale, import, export, have made, and have sold the\nSoftware and the Larger Work(s), and to sublicense the foregoing rights on\neither these or other terms.\n\nThis license is subject to the following condition:\nThe above copyright notice and either this complete permission notice or at\na minimum a reference to the UPL must be included in all copies or\nsubstantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n',
   },
   {
     "title": "Vim License",
